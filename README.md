@@ -11,10 +11,23 @@ Allow users to choose a folder using in CLI.
 I was building a CLI tool (using inquirer.js) and needed the user to be able to choose a folder to perform an action on.
 
 ## Example Usage
-```js
-var folderExplorer = require('inquirer-folder-explorer');
 
-folderExplorer('Please choose a folder', './').then((folder) => {
+```
+const chooseFolder = require('inquirer-folder-explorer');
+
+try {
+  chooseFolder({}).then((folder) => {
+    console.log('chosen', folder)
+  })
+} catch (err) {
+  console.log('err', err)
+}
+```
+
+```js
+const chooseFolder = require('inquirer-folder-explorer');
+
+chooseFolder({title: 'Please choose a folder', basePath: './'}).then((folder) => {
   console.log('you selected folder: ' +  folder);
 }).catch((err) => {
   console.error('some error')
@@ -24,6 +37,9 @@ folderExplorer('Please choose a folder', './').then((folder) => {
 ## Update
 
 Updated in Oct 2016 to work with Inquirer 1.0 and above, using promises and can be thus also be used with async/await :)
+
+Note: For some reason I can't seem to make it work unless at least one argument is passed, such as the empty options object.
+Please advice how to fix this! (seems to be a quirk of es6-promisify)
 
 ## API
 ### folderExplorer(message, basePath, callback)

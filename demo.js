@@ -1,7 +1,19 @@
-var folderExplorer = require('./dist');
+const chooseFolder = require('./src');
 
-folderExplorer('Please choose a folder', './').then((folder) => {
-  console.log('you selected folder: ' +  folder);
-}).catch((err) => {
-  console.error('some error')
-});
+try {
+  chooseFolder({}).then((folder) => {
+    console.log('chosen', folder)
+  })
+} catch (err) {
+  console.log('err', err)
+}
+
+
+try {
+  chooseFolder({title: 'Please choose a folder', basePath: './'}).then((folder) => {
+    console.log('chosen', folder)
+  })
+} catch (err) {
+  console.log('err', err)
+}
+
